@@ -1,40 +1,28 @@
 class Smoke extends Particle {
-  //PVector loc;
-  //PVector vel;
-  //float lifespan;
-  //PImage img;
+
   PImage smokeImg = loadImage("texture.png");
 
   Smoke(PVector p) {
+    //default smoke properties
     float y = -2;
     velocity = new PVector(0, y);
     position = p.get();
-    ttl = 100.0;
-    //img = img_;
+    ttl = 40;
   }
 
   // Method to update location
   public boolean update() {
     position.add(velocity);
-    ttl -= 2.5;
+    ttl--;
     if (ttl <= 0) return false;
     else return true;
   }
 
   // Method to display
   void display() {
-    tint(255, ttl);
+    tint(255, 2.5 * (float)ttl);
     image(smokeImg, position.x+50, position.y, 50, 50);
     noTint();
-  }
-
-  // Is the particle still useful?
-  boolean isDead() {
-    if (ttl <= 0.0) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
 

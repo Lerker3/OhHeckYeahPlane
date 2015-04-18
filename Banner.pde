@@ -8,7 +8,7 @@ class Banner {
     this.location = new PVector(x, y); 
     this.velocity = new PVector(0, 0);
     this.acceleration = new PVector(0, 0);
-    this.planeLocation = new PVector(0,0);
+    this.planeLocation = new PVector(0, 0);
     this.wid = wid;
     this.hight = hight;
     f = createFont("Arial", 16, true);

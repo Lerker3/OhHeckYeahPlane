@@ -1,7 +1,6 @@
 class Plane extends Particle {
   //PVector location, velocity, acceleration;
   Banner banner;
-  Spawner<Smoke> SmokeSpawner = new Spawner<Smoke>();
   PImage plane;
   //ArrayList<Smoke> smokeArray;
   int globalcount=0;
@@ -15,10 +14,13 @@ class Plane extends Particle {
     acceleration = new PVector(0, .2);
     banner = new Banner(position.x+150, position.y, 115, 20);
     plane = loadImage("plane.jpeg");
-    SmokeSpawner.children = new ArrayList<Smoke>();
-    SmokeSpawner.tts = 5;
   }
 
+  public PVector getPos()
+  {
+    return position;
+  }
+  
   void draw() {
     update();
     display();
@@ -26,7 +28,7 @@ class Plane extends Particle {
 
   void update() {
     //Move the plane
-    if (position.x < -210) {
+    if (position.x < -210) { //MAGIC NUMBER, NEEDS TO BE END OF SCREEN
       position.x = width + 40;
       position.y = height/2;
     }
@@ -41,28 +43,12 @@ class Plane extends Particle {
     //Call banner update function
     banner.update(position);
 
-    // for each smoke in smokespawner s.update();
-    ArrayList<Smoke> garbage = new ArrayList<Smoke>();
-    for (Smoke s : SmokeSpawner.children) {
-      if (!(s.update())) { //update
-        garbage.add(s);
-      }
-    }
-    for (Smoke g : garbage) {
-      SmokeSpawner.children.remove(g);
-    }
-
-    //Every 5 frames puff out some smoke
-    SmokeSpawner.tts--;
-    if (SmokeSpawner.tts <= 0) {
-      Smoke newSmoke = new Smoke(position);
-      SmokeSpawner.spawn(newSmoke);
-      SmokeSpawner.tts = 5;
-    }
   }
 
   void display() {
-    background(255, 255, 255);
+
+    banner.display();
+
     pushMatrix();
     translate(position.x, position.y);
     fill(255, 200, 200);
@@ -71,12 +57,6 @@ class Plane extends Particle {
     //for (int i=0; i < smokeArray.size (); i++) {
     //  smokeArray.get(i).display();
     //}
-
-    for (Smoke s : SmokeSpawner.children) {
-      s.display();
-    }
-
-    banner.display();
   }
 }
 

@@ -3,13 +3,7 @@ protected class Particle {
   protected PVector position;
   protected PVector velocity;
   protected PVector acceleration;
-  protected float ttl; // time to live
-
-  /*
-  protected float transparency;
-   protected float size;
-   color Color;
-   */
+  protected int ttl; // time to live
 
   Particle() {
     position = new PVector(0, 0, 0);
