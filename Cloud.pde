@@ -3,7 +3,7 @@ class Cloud extends Particle
   PImage img = loadImage("cloud.png"); // cloud image
   int CLOUD_TTL = 500; // cloud time to live
   int CLOUD_MAX_VELOCITY = 2;
-  float CLOUD_ACCEL_CHANGE = .1;
+  float CLOUD_ACCEL_CHANGE = .05;
 
   public Cloud(PVector p)
   {
